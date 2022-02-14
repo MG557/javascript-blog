@@ -20,14 +20,25 @@
     /* add class 'active' to the correct article */
   }
   
-  const links = document.querySelectorAll('.titles a');
+const links = document.querySelectorAll('.titles a');
   
-  for(let link of links){
+ for(let link of links){
     link.addEventListener('click', titleClickHandler);
   }
 
+ /* remove class 'active' from all article links */
 
+const activeLinks = document.querySelectorAll('.titles a.active');
 
+ for(let activeLink of activeLinks){
+    activeLink.classList.remove('active');
+}
 
+/* remove class 'active' from all articles */
+const activeArticles = document.querySelectorAll('#article-1');
+
+ for(let activeArticle of activeArticles){
+    activeArticle.classList.remove('active');
+}
 
   
