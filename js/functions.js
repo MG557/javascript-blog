@@ -1,4 +1,3 @@
-/*function clearMessages(){
-	document.getElementById('messages').innerHTML = 'titleList';
+function clearMessages(){
+	document.getElementById('messages').innerHTML = 'Article .';
 }
-*/
