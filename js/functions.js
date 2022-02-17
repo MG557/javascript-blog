@@ -1,3 +1,3 @@
 function clearMessages(){
-	document.getElementById('messages').innerHTML = 'Article .';
+	document.getElementById('messages').innerHTML = '';
 }
