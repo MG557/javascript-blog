@@ -72,7 +72,7 @@
     const articles = document.querySelectorAll(optArticleSelector);
     let html = '';
     for(let article of articles){
-      article.classList.remove('.titles');
+      //article.classList.remove('.titles');
       //let html = '';
       //console.log('html', html);
 
@@ -88,7 +88,7 @@
 
       /* get the title from the title element */
 
-      article.classList.add('.post');
+      //article.classList.add('.post');
 
       /* create HTML of the link */
       const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
