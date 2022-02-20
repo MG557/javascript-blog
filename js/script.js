@@ -5,6 +5,8 @@
   });
   */
 {
+  /* titleClickHandler M6 */
+
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -57,7 +59,12 @@
 
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles';
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list';
+
+
+  /* generateTitlelinks M6*/
+
 
   // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks(){
@@ -113,4 +120,55 @@
   }
 
   generateTitleLinks();
+
+  /* generateTags M7.2 */
+
+  // eslint-disable-next-line no-inner-declarations
+  function generateTags(){
+
+    /* find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+    /* START LOOP: for every article: */
+    for(let article of articles){
+      /* find tags wrapper */
+      const articleTagsWrapper = article.querySelector(optArticleTagsSelector);
+      console.log('articleTagsWrapper', articleTagsWrapper);
+
+      /* make html variable with empty string */
+      // eslint-disable-next-line no-unused-vars
+      let html = '';
+
+      /* get tags from data-tags attribute */
+      const articleTags = article.getAttribute('data-tags');
+      console.log('articleTags', articleTags);
+
+      /* split tags into array */
+      const articleTagsArray = articleTags.split(' ');
+      console.log('articleTagsArray', articleTagsArray);
+
+      /* START LOOP: for each tag */
+      for(let tag of articleTagsArray){
+      /* generate HTML of the link */
+        const linkTAG = '<li><a href="#tag-"' + tag + '"><span>' + tag + '</span></a></li>';
+
+        //<li><a href="#tag-cat">cat</a></li>
+        /* add generated code to html variable */
+        html = html + linkTAG;
+
+      /* END LOOP: for each tag */
+      }
+      /* insert HTML of all the links into the tags wrapper */
+
+      articleTagsWrapper.innerHTML = html;
+
+    /* END LOOP: for every article: */
+    }
+  }
+
+  generateTags();
+
+
+
+
+
 }
