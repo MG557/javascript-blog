@@ -6,6 +6,7 @@
   */
 {
   /* titleClickHandler M6 ////////////////////////////////////////////////////////////////////////////*/
+  /* 1.0) titleClickHandler */
 
   const titleClickHandler = function(event){
     event.preventDefault();
@@ -63,7 +64,7 @@
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author';
 
-  /* generateTitlelinks M6//////////////////////////////////////////////////////////////////*/
+  /* generateTitlelinks M.6//////////////////////////////////////////////////////////////////*/
 
 
   // eslint-disable-next-line no-inner-declarations
@@ -344,7 +345,7 @@
     }
 
     /* execute function "generateTitleLinks" with article selector as argument */
-    generateTitleLinks('[data-tags="' + author + '"]');
+    generateTitleLinks('[data-author="' + author + '"]');
 
   }
 
