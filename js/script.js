@@ -228,9 +228,9 @@
       //allTagsHTML += '<li><a href ="#tag-' + tag + '"> '+ tag +' ('+ calculateTagClass(allTags[tag], tagsParams) +') </a></li>';
       //const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
       //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      const tagLinkHTML = '<li><a href ="#tag-' + tag + '" > '+ tag +' ('+ calculateTagClass(allTags[tag], tagsParams) +') </a></li>';
+      const tagLinkHTML = '<li><a href "#tag-' + tag + '"> '+ tag +' ('+ allTags[tag] +') </a></li>';
 
-      console.log('tagLinkHTML:', tagLinkHTML);
+      console.log('tagLinkHTMLTT:', tagLinkHTML);
 
       allTagsHTML += tagLinkHTML;
 
@@ -299,6 +299,7 @@
   function addClickListenersToTags(){
     /* find all links to tags */
     //const tagsLinks = document.querySelectorAll(optArticleTagsSelector);
+    //const tagsLinks = document.querySelectorAll('.post-tags a');.tags.list
     const tagsLinks = document.querySelectorAll('.post-tags a');
     console.log('tagsLinksP:', tagsLinks);
     /* START LOOP: for each link */
@@ -313,7 +314,19 @@
     }
 
     /* END LOOP: for each link */
+
+    /* find all listlinks to tags /menu tags*/
+    const tagsListLinks = document.querySelectorAll('.tags.list a');
+    /* START LOOP: for each tagListLink */
+    for( let tagListLink of tagsListLinks){
+      /* add tagClickHandler as event listener for that link */
+      tagListLink.addEventListener('click', tagClickHandler);
+      console.log('tagListLink' , tagListLink);
+    }
+
+
   }
+
   addClickListenersToTags();
 
 
@@ -403,7 +416,7 @@
     }
 
     /* find all author links with "href" attribute equal to the "href" constant */
-    const authorLinks = document.querySelectorAll('a.active[href^="#author-' + href + '"]');
+    const authorLinks = document.querySelectorAll('a[href^="#author-' + href + '"]');
     console.log('authorLinks B', authorLinks);
     //'a[href="' + href + '"]'
     //'a.active[href^="#tag-"]'
