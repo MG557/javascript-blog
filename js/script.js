@@ -64,6 +64,7 @@
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
     optTagsListSelector = '.tags.list',
+    optAuthorsListSelector = '.authors.list',
     optCloudClassCount = 5,
     optCloudClassPrefix = 'tag-size-';
 
@@ -142,6 +143,7 @@
     }
     return params;
   }
+
 
   // eslint-disable-next-line no-inner-declarations
   function calculateTagClass(count, params){
@@ -228,12 +230,12 @@
       //allTagsHTML += '<li><a href ="#tag-' + tag + '"> '+ tag +' ('+ calculateTagClass(allTags[tag], tagsParams) +') </a></li>';
       //const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
       //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      const tagLinkHTML = '<li><a href "#tag-' + tag + '"> '+ tag +' ('+ allTags[tag] +') </a></li>';
+      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '('+ allTags[tag] +')</a></li>';
 
-      console.log('tagLinkHTMLTT:', tagLinkHTML);
+
 
       allTagsHTML += tagLinkHTML;
-
+      console.log('tagLinkHTMLTT:', tagLinkHTML);
     /* [NEW] END LOOP: for each tag in allTags: */
     }
     /*[NEW] add HTML from allTagsHTML to tagList */
@@ -299,8 +301,8 @@
   function addClickListenersToTags(){
     /* find all links to tags */
     //const tagsLinks = document.querySelectorAll(optArticleTagsSelector);
-    //const tagsLinks = document.querySelectorAll('.post-tags a');.tags.list
-    const tagsLinks = document.querySelectorAll('.post-tags a');
+    // const tagsLinks = document.querySelectorAll('.post-tags a');
+    const tagsLinks = document.querySelectorAll('.post-tags a' , '.tags.list a' , '.post' );
     console.log('tagsLinksP:', tagsLinks);
     /* START LOOP: for each link */
     for( let linkTag of tagsLinks){
@@ -316,14 +318,13 @@
     /* END LOOP: for each link */
 
     /* find all listlinks to tags /menu tags*/
-    const tagsListLinks = document.querySelectorAll('.tags.list a');
+    //const tagsListLinks = document.querySelectorAll('.tags.list a');
     /* START LOOP: for each tagListLink */
-    for( let tagListLink of tagsListLinks){
-      /* add tagClickHandler as event listener for that link */
-      tagListLink.addEventListener('click', tagClickHandler);
-      console.log('tagListLink' , tagListLink);
-    }
-
+    //for( let tagListLink of tagsListLinks){
+    /* add tagClickHandler as event listener for that link */
+    // tagListLink.addEventListener('click', tagClickHandler);
+    //console.log('tagListLink' , tagListLink);
+    //}
 
   }
 
@@ -334,9 +335,11 @@
   /* generateAuthors M7.2 ///////////////////////////////////////////////////////////////////////*/
   /* 1) generateAuthors */
 
+
   // eslint-disable-next-line no-inner-declarations
   function generateAuthors(){
-
+  /* [NEW] create a new variable allAuthors with an empty object */
+    let allAuthors = {};
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     //const articles = document.querySelectorAll(optArticleSelector);
@@ -345,7 +348,7 @@
     for(let article of articles){
 
       /* find author wrapper */
-      const articleAuthorWrapper = article.querySelector(optArticleAuthorSelector);
+      //const articleAuthorWrapper = article.querySelector(optArticleAuthorSelector);
       //console.log('articleAuthorWrapper', articleAuthorWrapper);
 
       /* make html variable with empty string */
@@ -374,19 +377,51 @@
 
       /* add generated code to html variable */
       html = html + linkAuthor;
+      /* [NEW] check if this link is NOT already in allAuthors */
 
-      /* END LOOP: for author */
+      //if(allTags.indexOf(linkHTML) == -1){
+      if(!allAuthors[articleAuthor]){
+      /* [NEW] add generated code to allAuthors array */
+      //allAuthors.push(linkHTML);
+        allAuthors[articleAuthor] = 1;
+      } else {
+        allAuthors[articleAuthor]++;
+      }
 
+      const articleAuthorWrapper = article.querySelector(optArticleAuthorSelector);
       /* insert HTML of all the links into the author wrapper */
-
-      //const articleAuthorWrapper = article.querySelector(optArticleAuthorSelector);
       articleAuthorWrapper.innerHTML = html;
+      /* END LOOP: for author */
     }
+    /* [NEW] find list of Authors in right column */
+    const authorList = document.querySelector(optAuthorsListSelector);
+    console.log('authorList', authorList);
+    /* [NEW] add html from allTags to tagList */
+    //authorList.innerHTML = allAuthors.join(' ');
+    console.log(allAuthors);
+
+
+    /* [NEW] create variable for all links HTML code */
+    let allAuthorsHTML = '';
+
+    /* [NEW] START LOOP: for each tag in allTags: */
+    for(let articleAuthor in allAuthors){
+      /* [NEW] generate code of a link and add it to allTagsHTML */
+      allAuthorsHTML += '<li><a href="#author-' + articleAuthor + '"> '+ articleAuthor +' (' + allAuthors[articleAuthor] + ')</a> </li>';
+
+    /* [NEW] END LOOP: for each tag in allTags: */
+    }
+    /*[NEW] add HTML from allTagsHTML to tagList */
+    authorList.innerHTML = allAuthorsHTML;
+
 
   }
+  // const tagLinkHTML = '<li><a href "#tag-' + tag + '"> '+ tag +' ('+ allTags[tag] +') </a></li>';
+
   generateAuthors();
 
   /* 3.1) authorClickHandler */
+
 
   // eslint-disable-next-line no-inner-declarations
   function authorClickHandler(event){
@@ -447,12 +482,15 @@
     /* add addClickToAuthors as event listener for that link */
       linkAuthor.addEventListener('click', authorClickHandler);
       console.log('linkAuthor' , linkAuthor);
-    }
-
-
-
 
     /* END LOOP: for each link */
+    }
+    /* find all links authors /menu-list author*/
+    const authorListLinks = document.querySelectorAll('.list.authors a');
+    /* START LOOP: for each link */
+    for (let authorLinkList of authorListLinks){
+      authorLinkList.addEventListener('click', authorClickHandler);
+    }
   }
   addClickListenersToAuthors();
 
