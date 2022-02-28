@@ -230,7 +230,7 @@
       //allTagsHTML += '<li><a href ="#tag-' + tag + '"> '+ tag +' ('+ calculateTagClass(allTags[tag], tagsParams) +') </a></li>';
       //const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
       //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + '('+ allTags[tag] +')</a></li>';
+      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + ''+ '' +'</a></li>';
 
 
 
