@@ -151,7 +151,7 @@
     const normalizedMax = params.max - params.min;
     const percentage = normalizedCount / normalizedMax;
     const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1);
-    return optCloudClassPrefix , classNumber;
+    return optCloudClassPrefix + classNumber;
   }
 
   // eslint-disable-next-line no-inner-declarations
@@ -240,7 +240,7 @@
     }
     /*[NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
-
+    console.log('tagListsize:', tagList);
   }
 
   generateTags();
@@ -302,7 +302,7 @@
     /* find all links to tags */
     //const tagsLinks = document.querySelectorAll(optArticleTagsSelector);
     // const tagsLinks = document.querySelectorAll('.post-tags a');
-    const tagsLinks = document.querySelectorAll('.post-tags a' , '.tags.list a' , '.post' );
+    const tagsLinks = document.querySelectorAll('.post-tags a , .tags.list a ' );
     console.log('tagsLinksP:', tagsLinks);
     /* START LOOP: for each link */
     for( let linkTag of tagsLinks){
@@ -475,7 +475,7 @@
   function addClickListenersToAuthors(){
     /* find all links to autors */
     //const tagsLinks = document.querySelectorAll(optArticleTagsSelector);
-    const authorsLinks = document.querySelectorAll('.post-author a');
+    const authorsLinks = document.querySelectorAll('.post-author a , .list.authors a');
     console.log('authorLinksP:', authorsLinks);
     /* START LOOP: for each link */
     for( let linkAuthor of authorsLinks){
@@ -486,11 +486,11 @@
     /* END LOOP: for each link */
     }
     /* find all links authors /menu-list author*/
-    const authorListLinks = document.querySelectorAll('.list.authors a');
+    //const authorListLinks = document.querySelectorAll('.list.authors a');
     /* START LOOP: for each link */
-    for (let authorLinkList of authorListLinks){
-      authorLinkList.addEventListener('click', authorClickHandler);
-    }
+    //for (let authorLinkList of authorListLinks){
+    // authorLinkList.addEventListener('click', authorClickHandler);
+    //}
   }
   addClickListenersToAuthors();
 

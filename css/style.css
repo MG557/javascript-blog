@@ -76,7 +76,18 @@ body {
   display: inline-block;
   margin: 0 5px 0 5px;
 }
+.tag-size-5 {
+ font-size: 150%;
+ color: rgb(7, 63, 26);
+ font-family: "Oswald", cursive;
 
+}
+.tag-size-3 {
+  font-size: 120%;
+  color: rgb(143, 55, 136);
+  font-family: "Oswald", cursive;
+
+ }
 
 /* Authors */
 .authors li {
