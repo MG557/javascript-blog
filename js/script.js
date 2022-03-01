@@ -5,6 +5,17 @@
   });
   */
 {
+  /* Hndlebars - templates *////////////////////////////////////////////////////////////////////////////*/
+
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    //taglink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    taglink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    //linkAuthor: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+
+  };
+
+
   /* titleClickHandler M6 ////////////////////////////////////////////////////////////////////////////*/
   /* 1.0) titleClickHandler */
 
@@ -106,7 +117,10 @@
       //article.classList.add('.post');
 
       /* create HTML of the link */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+
+      //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTMLData = {id: articleId, title: articleTitle};
+      const linkHTML = templates.articleLink(linkHTMLData);
 
       /* insert link into titleList */
 
@@ -180,13 +194,17 @@
 
       /* START LOOP: for each tag */
       for(let tag of articleTagsArray){
-      /* generate HTML of the link */
+
+        /* generate HTML of the link */
 
         //const linkTAG = '<li><a href="#tag-">' + tag + '</a></li>';
-        const linkTAG = '<li><a href ="#tag-' + tag + '">' + tag + '</a></li>';
-        console.log('linkTAG', linkTAG);
+        //const linkTAG = '<li><a href ="#tag-' + tag + '">' + tag + '</a></li>';
+        //console.log('linkTAG', linkTAG);
+        const linkTAGData = {id: tag, title: tag};
+        const linkTAG = templates.taglink(linkTAGData);
 
         //<li><a href="#tag-cat">cat</a></li>
+
         /* add generated code to html variable */
         html = html + linkTAG;
         /* [NEW] check if this link is NOT already in allTags */
@@ -230,8 +248,8 @@
       //allTagsHTML += '<li><a href ="#tag-' + tag + '"> '+ tag +' ('+ calculateTagClass(allTags[tag], tagsParams) +') </a></li>';
       //const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
       //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + ''+ '' +'</a></li>';
 
+      const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) +'">' + tag + ''+ '' +'</a></li>';
 
 
       allTagsHTML += tagLinkHTML;
@@ -365,12 +383,15 @@
 
       /* START LOOP: for each tag */
       //for(let tag of articleTagsArray){
+
       /* generate HTML of the link - Author */
 
       //const linkTAG = '<li><a href="#tag-">' + tag + '</a></li>';
       const linkAuthor = '<li><a href ="#author-' + articleAuthor + '">' + articleAuthor + '</a></li>';
-      console.log('linkAuthor', linkAuthor);
+      //console.log('linkAuthor', linkAuthor);
 
+      //const linkAuthorData = {id: articleAuthor, title: articleAuthor};
+      //const linkAuthor = templates.linkAuthor(linkAuthorData);
       //<li><a href="#tag-cat">cat</a></li>
       //const authorsList = document.querySelectorAll(optArticleAuthorSelector);
       //authorsList.insertAdjacentHTML('beforeend', '.list authors');
