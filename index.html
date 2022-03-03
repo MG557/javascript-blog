@@ -211,7 +211,7 @@
 
         <script id="template-tag-cloud-link" type="text/x-handlebars-template">
           {{#each tags}}
-          <li><a href="#tag-{{tag}}" class="{{calculateTagClass(allTags[tag], tagsParams)}}">{{ tag }} ({{''}})</a></li>
+          <li><a href="#tag-{{tag}}" class="{{ className }}">{{ tag }} ({{ count }})</a></li>
 
           {{/each}}
         </script>
@@ -219,7 +219,7 @@
 
         <script id="template-author-cloud-link" type="text/x-handlebars-template">
           {{#each allAuthors}}
-          <li><a href="#author-{{articleAuthor}}">{{ articleAuthor }} ({{allAuthors[articleAuthor]}})</a></li>
+          <li><a href="#author-{{articleAuthor}}">{{ articleAuthor }} ({{ count }})</a></li>
 
           {{/each}}
         </script>

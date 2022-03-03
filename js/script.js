@@ -403,7 +403,7 @@
 
       //const linkTAG = '<li><a href="#tag-">' + tag + '</a></li>';
       //const linkAuthor = '<li><a href ="#author-' + articleAuthor + '">' + articleAuthor + '</a></li>';
-      const linkAuthor = templates.tagLink(linkAuthorData);
+      const linkAuthor = templates.linkAuthor(linkAuthorData);
       //console.log('linkAuthor', linkAuthor);
 
 
